@@ -87,11 +87,10 @@ open class MessagesCollectionView: UICollectionView {
     }
 
     public func scrollToBottom(animated: Bool = false) {
-        let collectionViewContentHeight = collectionViewLayout.collectionViewContentSize.height
-
-        performBatchUpdates(nil) { _ in
-            self.scrollRectToVisible(CGRect(0.0, collectionViewContentHeight - 1.0, 1.0, 1.0), animated: animated)
-        }
+      if self.numberOfSections > 0 {
+        let lastItemIndexPath = IndexPath(item: 0, section: self.numberOfSections - 1)
+        self.scrollToItem(at: lastItemIndexPath, at: .bottom, animated: false)
+      }
     }
     
     public func reloadDataAndKeepOffset() {
